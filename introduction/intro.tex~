@@ -1,0 +1,900 @@
+% pdflatex vgp_ev.tex 
+\documentclass{beamer}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{beamerthemesplit}
+\usepackage{multicol,pgf,tikz,amsmath}
+\usetikzlibrary{shapes,arrows}
+\usepackage{multimedia}
+\usepackage{color}
+%\input{epsf}
+
+\definecolor{durham}{cmyk}{0.5,0.8,0.,0.6}
+%\setbeamercovered{transparent}
+\mode<presentation>
+{  \usetheme[height=7mm]{Rochester}
+  \usecolortheme[named=durham]{structure}
+  \useinnertheme[shadow]{rounded}
+  \usefonttheme[onlymath]{serif}
+  %\setbeamercovered{transparent}
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+  \setbeamertemplate{navigation symbols}{} 
+  %\setbeamertemplate{footline}{\hspace{12cm} \insertframenumber/\inserttotalframenumber
+  \setbeamertemplate{footline}{V. Gonzalez-Perez \hspace{10.2cm} \insertframenumber/\inserttotalframenumber }
+}
+
+%%%%%%%%%%%%%%%%
+\newcommand{\lcdm}{$\rm{\Lambda CDM}$}
+\newcommand{\gl}{\textsc{galform}}
+\newcommand{\eg}{\textsc{eagle}}
+\newcommand{\egdm}{\textsc{eagleDMO}}
+\newcommand{\lgl}{\textsc{l-galaxies}}
+\newcommand{\subf}{\textsc{subfind}}
+\newcommand{\msun}{{\rm M}_{\odot}}
+\newcommand{\mb}{M_{\rm Break}}
+\newcommand{\mth}{{\rm M}_{200}^{\rm crit}}
+\newcommand{\mtry}{\todo[\textcolor{blue}{Upd.}]}
+\newcommand{\stry}{\todo[\textcolor{blue}{From Shaun: Upd.}]}
+\newcommand{\ptry}{\todo[\textcolor{blue}{From Peter: Upd.}]}
+\newcommand{\nm}{$\langle N \rangle_{M}$}
+%%%%%%%%%%%%%%%%
+
+\title{Introduction to galaxy formation: \\ Evolution of large scale structures and galaxy properties.
+}
+\author{{\bf Violeta Gonzalez-Perez}}
+\institute{@violegp
+}
+\date{}
+
+
+\begin{document}
+\frame{\titlepage 
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[height=0.25\textheight]{/home/violeta/charlas/fig/logos/icg-logo.pdf}
+\end{center}
+}
+
+
+%%_____Flow charts_____________________________________
+\tikzstyle{decision} = [diamond, draw=green!50!black!50,fill=green!50!black!50, text centered, text width=3.8em]
+\tikzstyle{up} = [rectangle, draw, very thick,
+draw=blue!50!black!50,level distance=4cm,
+    text width=15em, text centered, rounded corners, minimum height=8em]
+\tikzstyle{down} = [rectangle, draw, very thick,
+draw=red!50!black!50,level distance=4cm,
+    text width=5em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{up1} = [rectangle, draw, very thick,
+draw=blue!50!black!50,level distance=4cm,
+    text width=5em, text centered, rounded corners, minimum height=5em]
+\tikzstyle{down1} = [rectangle, draw, very thick,
+draw=red!50!black!50,level distance=4cm,
+    text width=5em, text centered, rounded corners, minimum height=5em]
+\tikzstyle{up2} = [rectangle, draw, very thick,
+draw=blue!50!black!50,level distance=4cm,
+    text width=10em, text centered, rounded corners, minimum height=8em]
+\tikzstyle{sed} = [rectangle, draw, very thick,
+draw=green!50!black!50,level distance=4cm,
+    text width=5em, text centered, rounded corners, minimum height=7em]
+\tikzstyle{thing} = [rectangle, draw, very thick,
+draw=red!50!black!50,level distance=4cm,
+    text width=5.5em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex]
+\tikzstyle{cloud} = [draw, ellipse,fill=black]   
+\tikzstyle{newm} = [draw=green!50!black!50, ellipse,fill=green!50!black!50,text width=4em,text centered]   
+\tikzstyle{prop} = [circle,fill=red, level distance=1cm,text width=5em,text centered]   
+\tikzstyle{empty} = [minimum height=2em]   
+
+
+%%_____Introduction______________________________________
+\begin{frame}{Modelling galaxies}
+\begin{columns}
+\begin{column}{7cm}
+\begin{center}
+   \includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/intro/hst.jpg}
+\end{center}
+\end{column}
+\begin{column}{6cm}
+\begin{itemize}
+\item What is a galaxy?
+\item Why do we want to model galaxies?
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Galaxies in a cosmological context}
+\begin{tikzpicture}[node distance = 6cm, auto]
+   \node [empty, rotate=90, xshift=1cm ] (galaxies) {\includegraphics[width=0.6\textwidth]{/home/violeta/charlas/fig/intro/mice_hst_big_vw1.jpg}} ; 
+   \node [empty, right of=galaxies] (lss) {\includegraphics[width=0.5\textwidth]{/home/violeta/charlas/fig/eBOSS/eboss.jpg}} ; 
+
+    % Draw edges
+    \path [line, thick] (galaxies) -> (lss); 
+\end{tikzpicture}
+
+From galaxy scales (tens kpc), to the local group size (Mpcs) to the size of the observable Universe (tens of Gpc), however subpc processes affect properties at galactic scales. 
+
+\end{frame}
+
+\begin{frame}{Level of detail}
+
+In order to model galaxies in a cosmological context we need to cover from galaxy scales (tens kpc), to the local group size (Mpcs) to the size of the observable Universe (tens of Gpc), however subpc processes affect properties at galactic scales. 
+
+The level of detail in each stage depends on the problem we want to adress as resources are finite. 
+
+I'll focus on having a sample of model galaxies large enough to be representative of the observable Universe (about 10$^{10}$ galaxies).
+
+{\color{red} Add numbers from Millennium and Eagle and the extrapolations}
+\end{frame}
+
+\begin{frame}{How to proceed?}
+\begin{itemize}
+\item<1->{ How do we make a cake?
+\begin{tikzpicture}[node distance = 4cm, auto]
+    \node [thing] (ingredients) {Ingredients}; 
+    \node [thing, right of=ingredients] (recipes) {Recipe}; 
+    \node [thing, right of=recipes] (taste) {Quality check}; 
+
+    % Draw edges
+    \path [line, thick] (ingredients) -> (recipes); \path [line, thick] (recipes) -> (taste);
+\end{tikzpicture}
+}
+\item<2->{ How do we make a galaxy?
+\begin{tikzpicture}[node distance = 4cm, auto]
+    \node [thing] (ingredients) {Components}; 
+    \node [thing, right of=ingredients] (recipes) {Relevant \\ physical \\processes}; 
+    \node [thing, right of=recipes] (taste) {Comparisson \\to observations}; 
+
+    % Draw edges
+    \path [line, thick] (ingredients) -> (recipes); \path [line, thick] (recipes) -> (taste);
+\end{tikzpicture}
+}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Overview: Components for modelling a galaxy}
+\begin{center}
+\includegraphics[width=1.\textwidth]{/home/violeta/charlas/fig/intro/piechart.jpg} 
+\end{center}
+%\begin{itemize}
+%\item What are the ingredients we need to model galaxies?
+%\item Cosmology: What are the main components of the energy-matter composition of the Universe?
+%\item Dark Matter(DM): how do we model it? (We'll return to this point later)
+%\end{itemize}
+\end{frame}
+
+\begin{frame}{Overview: Relevant physical processes}
+\begin{itemize}
+\item<1-> Gravity is the main driver for the growth of structures.
+\item<2-> Baryon physics: cooling of gas, flows of gas, star formation, etc.
+\end{itemize}
+\begin{overprint}
+\begin{center}
+\includegraphics<1>[width=0.9\textwidth]{/home/violeta/charlas/fig/intro/Planck_CMB_Mollweide_4k.jpg}
+
+\includegraphics<2>[width=0.9\textwidth]{/home/violeta/charlas/fig/intro/fumagalli14.png}
+
+{\tiny \color{orange}Planck+15}
+{\tiny \color{orange} Fumagalli+15} 
+\end{center}
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Overview: Comparisson to observations}
+The fundamental observable when studying stars or galaxies is the light they emit measured by telescopes within a reduced wavelength range: 
+\begin{itemize}
+\item {\bf Luminosity} Energy emitted within a finite waveband per unit time. L$_{\odot}= 3.846\cdot 10^{33}{\rm erg}s^{-1}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{How to proceed depends on your goal:}
+\begin{flushleft}
+\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/intro/sizes_matthieu.png}
+\end{flushleft}
+
+\vspace{1cm}Example: 
+
+The final Eagle run took $4.5\cdot 10^{6}$ CPU hours 
+
++ $40\cdot 10^{6}$ CPU hours for calibration
+
+\begin{center}
+{\tiny {\sc credit:} Matthieu Schaller}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Modelling DM:}
+
+{\color{blue} a) N-body simulations:} Softening length and volume are the limiting factors.
+\end{center}
+{\color{blue} b) Approximattive methods:} (LPT, COLA, PINOCHIO, etc) They are calibrated in simulations, but they are useful for covariance matrices.
+\end{frame}
+
+
+\begin{frame}{Modelling galaxies:}
+
+{\color{blue} a) In parallel:}  hydrodynamical simulations
+\begin{center}
+   \includegraphics[height=0.4\textheight]{/home/violeta/charlas/fig/eagle/eagle.png}
+\end{center}
+{\color{blue} b) In series:}  SAMs, EMs, SHAMs, HOD modelling
+
+   1.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/ms_z0.jpg}{ } 
+    2.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/intro/mergertree.jpg}{ }
+    3.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/galform_fake_panstarrs.jpeg}
+\end{frame}
+
+\begin{frame}{Simulated volumes:}
+\begin{center}
+\includegraphics[width=1.\textwidth]{/home/violeta/charlas/fig/intro/sizes_clau.png}
+
+{\tiny {\sc credit:} Claudia Lagos}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{The modelling approach depends on the scientific question}
+\begin{center}
+\includegraphics[height=.9\textheight]{/home/violeta/charlas/fig/intro/Lagos.pdf}
+
+{\tiny {\sc credit:} Claudia Lagos}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Focusing on model galaxies calibrated at $z=0$}
+Many studies attempt to have statistically representative galaxies at $z=0$ and study then how they evolve. 
+\begin{center}
+\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/schaye15.png}
+
+{\tiny \color{orange} Schaye+15}
+\end{center}
+
+Other approaches are needed for other purposes: {\tiny have a catalogue of model galaxies that reproduce the spatial distribution of galaxies at a given z, produce a sample of galaxies with the same observed colours as LBG at $z=3$, to study their evolution, etc.}
+\end{frame}
+
+\begin{frame}{From luminosities to flux}
+\begin{itemize}
+\item {\bf Flux} Total amount of energy that crosses a unit area per unit time.
+\begin{equation*}
+\nu F_{\nu} = \frac{\nu_eL_{\nu_e}}{4\pi D_L^2(z)}
+\end{equation*}
+From the definition of redshift we have:
+\begin{equation*}
+1 + z = \frac{\lambda_{\rm observed}}{\lambda_{\rm emitted}}=\frac{\nu_{\rm emitted}}{\nu_{\rm observed}}=\frac{\nu_{\rm e}}{\nu}
+\end{equation*}
+Thus:
+\begin{equation*}
+F_{\nu} = (1+z)\frac{L_{(1+z)\nu}}{4\pi D_L^2(z)} 
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{From flux to magnitudes}
+\begin{itemize}
+\item {\bf Magnitude}
+\begin{equation*}
+m_1 - m_{ref} = -2.5log_{10}\left(\frac{{\rm Flux}_1}{{\rm Flux}_{ref}}\right)
+\end{equation*}
+\item {\bf Absolute magnitude, M:} The magnitude of an object placed 10pc from the observer. 
+\item {\bf Apparent magnitude, m:} $m = M + DM + K_e$
+\begin{align*}
+m - M &= -2.5log_{10}\left(\frac{F_{\nu}}{F_{\nu,{10\rm pc}}}\right) = \\
+&= -2.5log_{10}\left((1+z)\frac{L_{(1+z)\nu}}{4\pi D_L^2(z)}\frac{4\pi (10{\rm pc})^2}{L_{\nu}}\right) \\
+&= 5log_{10}\left(\frac{D_L(z)}{(10{\rm pc})}\right)  - 2.5log_{10}\left((1+z)\frac{L_{\nu_e}}{L_{\nu}}\right) 
+\end{align*}
+\end{itemize}
+\end{frame}
+
+%\section{The luminosity function}
+%\begin{frame}{The luminosity function}
+%% LF image
+%Number of galaxies with L$\pm$dL, per comoving volume
+%\end{frame}
+%
+%
+%
+%\begin{frame}{Fundamental observables: broad band magnitudes}
+%% Add a plot with a spectra at 2 z + broad band filters
+%\end{frame}
+%
+%\begin{frame}{Fundamental observables: magnitude limited samples}
+%% Concept of distance and brightness
+%Number of galaxies with magnitudes $m\pm{\rm d}m$ per sterradian:
+%\begin{equation*}
+%N(m){\rm m} =}int_{z=0}^{{\rm formation} z}
+%\end{equation*}
+%\end{frame}
+%
+%
+%\begin{frame}{Fundamental observables: number counts}
+%Maybe add plot of the K-band Number counts
+%Number of galaxies with magnitudes $m\pm{\rm d}m$ per sterradian:
+%\begin{equation*}
+%N(m){\rmd m} =}int_{z=0}^{{\rm formation} z}
+%\end{equation*}
+%\end{frame}
+%
+%\begin{frame}{The luminosity function: accounting for the survey limits}
+%Vmax
+%\end{frame}
+%
+%\begin{frame}{The observed luminosity function}
+%Plot +typical Schechter function in terms of L and m 
+%\end{frame}
+%
+%
+%\begin{frame}{The observed stellar mass function}
+% Plot + stress that is the same  shape
+%
+%How do we go from L to M? Assumptions needed to get stellar masses from luminosities
+%\end{frame}
+
+%
+%
+%    \node [thing, right of=jm, yshift=-1.5cm] (taste) {}; 
+%
+%
+%\begin{frame}{The processes that need modelling: {\small gravity alone is not enough}}
+%\begin{columns}
+%\begin{column}{7cm}
+%\begin{overprint}
+%\begin{center}
+%   \includegraphics<1>[width=1\textwidth]{/home/violeta/charlas/fig/intro/lf_tt.eps}
+%   \includegraphics<2>[height=0.9\textheight]{/home/violeta/charlas/fig/intro/mice.ps}
+%\end{center}
+%\end{overprint}
+%\end{column}
+%\begin{column}{6cm}
+%\begin{itemize}
+%\item <1->If we assume \\ a simple approach:\\ There are more DM halos \\ than galaxies at the \\ faint and bright ends.  
+%\item <1->Galaxy formation is an \\  inefficient process! 
+%\item <2->\textcolor{durham}{Galaxies are NOT shaped only by gravity.} Gas physics, stellar formation and feedback, mergers, etc.,  also shape galaxies.
+%\end{itemize}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%%_________________________
+%
+%\begin{frame}{The processes that need modelling: only gravity?}
+%\begin{overprint}
+%\begin{center}
+%\includegraphics<1>[width=1.\textwidth]{/home/violeta/teaching/lecture2016.port/db_mf/mf.pdf}
+%\includegraphics<2>[width=1.\textwidth]{/home/violeta/teaching/lecture2016.port/db_mf/obs_gsmf.pdf}
+%\includegraphics<3>[width=1.\textwidth]{/home/violeta/teaching/lecture2016.port/db_mf/mhfb.pdf}
+%\includegraphics<4>[width=1.\textwidth]{/home/violeta/teaching/lecture2016.port/db_mf/mhfbnorm.pdf}
+%\end{center}
+%\end{overprint}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%\begin{frame}{How to proceed?}
+%
+%{\color{blue} a) In parallel:}  hydrodynamical simulations
+%\begin{center}
+%   \includegraphics[height=0.4\textheight]{/home/violeta/charlas/fig/eagle/eagle.ps}
+%\end{center}
+%{\color{blue} b) In series:}  SAMs, SHAMs, HOD modelling
+%
+%   1.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/ms_z0.eps}{ } 
+%    2.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/intro/mergertree.eps}{ }
+%    3.\includegraphics[height=0.27\textheight]{/home/violeta/charlas/fig/galform_fake_panstarrs.eps}
+%\end{frame}
+%
+%
+%\begin{frame}{The semi-analytical approach}
+%\begin{center}
+%\movie[autostart]{\includegraphics[height=0.7\textheight]{/home/violeta/charlas/fig/intro/gal_dm.eps}}{movie}
+%\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}{Making galaxies in the computer {\small with a semi-analytical model}}
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    \node [cloud] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%    \node [cloud, below of=cosmo, yshift=1cm] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [decision, below of=dm] (cool) {\textcolor{white}{Efficient cooling?}}; 
+%   \node [empty, below of=cool, xshift=-0.4cm, yshift=0.4cm] (yescool) {\textcolor{green!50!black!50}{Yes}};
+%   \node [empty, left of=cool, xshift=0.4cm, yshift=0.2cm] (nocool) {\textcolor{green!50!black!50}{No}};
+%    \node [thing, left of=cool, xshift=-1cm] (dh) {Dark Halo}; 
+%    \node [decision, below of=cool, yshift=-1cm] (jm) {\textcolor{white}{Large j?}}; 
+%   \node [empty, right of=jm, yshift=1cm, xshift=-1.2cm, rotate=40 ] (yesj) {\textcolor{green!50!black!50}{Yes}};
+%   \node [empty, right of=jm, yshift=-1cm, xshift=-1.2cm, rotate=-40] (noj) {\textcolor{green!50!black!50}{No}};
+%    \node [thing, right of=jm, yshift=1.5cm] (disc) {Disc}; 
+%    \node [thing, right of=jm, yshift=-1.5cm] (bulge) {Bulge}; 
+%    \node [decision, right of=jm,xshift=1.5cm] (merge) {\small \textcolor{white}{Merger? Disc instability?}}; 
+%    % Draw edges
+%    \path [line, thick] (cosmo) -> (dm); \path [line, thick] (dm) -> (cool);
+%    \path [line, thick] (cool) -> (dh); \path [line, thick] (dh) -> (dm);
+%    \path [line, thick] (cool) -> (jm); \path [line, thick] (jm) -> (disc);
+%    \path [line, thick] (disc) -> (merge); \path [line, thick] (jm) -> (bulge);
+%    \path [line, thick] (merge) -> (bulge); 
+%\end{tikzpicture}
+%\end{frame}
+%
+%
+%\begin{frame}{Making galaxies in the computer {\small with a semi-analytical model}}
+%\begin{center}
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    \node [cloud] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%    \node [cloud, below of=cosmo, yshift=1cm] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [empty, below of=dm, yshift=-2cm] (galform) {\includegraphics[height=0.7\textheight]{/home/violeta/charlas/fig/lee14_smf.ps}};
+%
+%    \path [line, thick] (cosmo) -> (dm); \path [line, thick] (dm) -> (cool);
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+%
+%
+%%_______Merger trees and assumtions______________
+%\begin{frame}{More on the merger trees {\small and the first comparison with observations}}
+%\begin{columns}
+%\begin{column}{8cm}
+%   \includegraphics[height=1.\textheight]{/home/violeta/charlas/fig/planck_eagle/mh_smf.ps}
+%\end{column}
+%\begin{column}{4cm}
+%  \begin{itemize}
+%    \item The merger tres need to have enough time outputs and enough mass resolution for the population under study.
+%    \item Here, I've corrected the observations because of their assumed IMF...
+%  \end{itemize}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%%%_____Galform______________________________________
+%\begin{frame}{The semi-analytical approach: {\tiny Because galaxies are not only shaped by gravity}}
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    % Place nodes
+%    \node [empty,xshift=-2cm] (galform) {\includegraphics[height=0.15\textheight]{/home/violeta/charlas/fig/galform.eps}};
+%    \node [cloud, above of=galform] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [cloud, above of=dm,yshift=-1cm] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%    \node [prop, below of=galform,yshift=-1.5cm] (gprop) {\textcolor{white}{Observable galaxy  properties}}; 
+%   \node [decision, right of=gprop,xshift=2cm] (update) {\small \textcolor{white}{Fit obs. \\ at z=0?}}; 
+%   \node [newm, right of=update,xshift=1.5cm] (sam) {\textcolor{white}{Stable model}}; 
+%
+%   \node [empty, below of=galform, xshift=3cm, yshift=-0.3cm, rotate=-40] (no) {\textcolor{green!50!black!50}{NO}};
+%   \node [empty, below of=galform, xshift=1.8cm, yshift=0.2cm,rotate=-40] (nom) {\textcolor{green!50!black!50}{\tiny update free parameters}};
+%   \node [empty, left of=sam, yshift=0.2cm, xshift=0.2cm] (yes) {\textcolor{green!50!black!50}{YES}};
+%   \node [empty, left of=update, yshift=0.2cm] (test) {\textcolor{green!50!black!50}{Test}};
+%%
+%%%
+%%%
+%    % Draw edges
+%    \path [line, thick] (cosmo) -> (dm);
+%    \path [line, thick] (dm) -> (galform);
+%    \path [line, thick] (galform) -> (gprop);
+%    \path [line, thick,draw=green!50!black!50] (gprop) -> (update);
+%    \path [line, thick,draw=green!50!black!50] (update) -> (galform);
+%    \path [line, thick,draw=green!50!black!50] (update) -> (sam);
+%%%    \path [line] (disks) -> (prop);
+%%%    \path [line] (prop) -> (update);
+%%
+%\end{tikzpicture}
+%\end{frame}
+%
+%
+%\begin{frame}{Free parameters in GP14 tunned to reasonably match:}
+%\begin{columns}
+%\begin{column}{6cm}
+%\begin{center}
+% \includegraphics[width=0.5\textwidth]{/home/violeta/charlas/fig//lf_sps/B_z0.ps}
+%
+% \includegraphics[width=0.7\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/LBGs_plot.ps}
+%\end{center}
+%\end{column}
+%\begin{column}{6cm}
+% \includegraphics[width=1.1\textwidth]{/home/violeta/charlas/fig/lf_sps/Klf_plots.ps}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%\begin{frame}{Some predictions from the GP14 flavour of \gl:}
+%\begin{columns}
+%\begin{column}{6cm}
+%   \includegraphics[width=1.2\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/massf.eps}
+%\end{column}
+%\begin{column}{6cm}
+% \includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/sfrv_global.eps}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}{The semi-analytical approach: {\tiny Because galaxies are not only shaped by gravity}}
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    % Place nodes
+%    \node [empty,xshift=-2cm] (galform) {\includegraphics[height=0.15\textheight]{/home/violeta/charlas/fig/galform.eps}};
+%   \node [up, right of=galform,xshift=3.5cm,yshift=1cm] (disk) {\small \textcolor{durham}{ SAMs have free parameters that need calibration and some other choices need to be made: 
+%\hspace{-0.5cm}{\begin{itemize}
+%\item IMF
+%\item Chemical Evolution:\\ IRA?, yield? R?
+%\item Stellar population 
+%\item Dust attenuation model
+%\end{itemize}}
+%}};
+%    \node [cloud, above of=galform] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [cloud, above of=dm,yshift=-1cm] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%    \node [prop, below of=galform,yshift=-1.5cm] (gprop) {\textcolor{white}{Observable galaxy  properties}}; 
+%   \node [decision, right of=gprop,xshift=2cm] (update) {\small \textcolor{white}{Fit obs. \\ at z=0?}}; 
+%   \node [newm, right of=update,xshift=1.5cm] (sam) {\textcolor{white}{Stable model}}; 
+%
+%   \node [empty, below of=galform, xshift=3cm, yshift=-0.3cm, rotate=-40] (no) {\textcolor{green!50!black!50}{NO}};
+%   \node [empty, below of=galform, xshift=1.8cm, yshift=0.2cm,rotate=-40] (nom) {\textcolor{green!50!black!50}{\tiny update free parameters}};
+%   \node [empty, left of=sam, yshift=0.2cm, xshift=0.2cm] (yes) {\textcolor{green!50!black!50}{YES}};
+%   \node [empty, left of=update, yshift=0.2cm] (test) {\textcolor{green!50!black!50}{Test}};
+%%
+%%%
+%%%
+%    % Draw edges
+%    \path [line, thick] (cosmo) -> (dm);
+%    \path [line, thick] (dm) -> (galform);
+%    \path [line, thick] (galform) -> (gprop);
+%    \path [line, thick,draw=green!50!black!50] (gprop) -> (update);
+%    \path [line, thick,draw=green!50!black!50] (update) -> (galform);
+%    \path [line, thick,draw=green!50!black!50] (update) -> (sam);
+%%%    \path [line] (disks) -> (prop);
+%%%    \path [line] (prop) -> (update);
+%%
+%\end{tikzpicture}
+%\end{frame}
+%
+%
+%\begin{frame}{The GSMF is also affected by those assumptions}
+%\begin{center}
+%\includegraphics<1>[height=1\textheight]{/home/violeta/charlas/fig/mit13.ps}
+%\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}{Comparing to the SFRD is still problematic}
+%\includegraphics[width=0.5\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/sfrv_global.eps}
+%\includegraphics[width=0.5\textwidth]{/home/violeta/charlas/fig/sfh/chang15.ps}
+%% SFR from optical+IR data is lower by a factor of 1.4 than those derived from optical spectroscopy.
+%\end{frame}
+%
+%
+%% Issues with the assumptions 
+%\begin{frame}{The IMF might not be universal}
+%\begin{center}
+%\vspace{-1.5cm}\includegraphics[width=0.6\textwidth]{/home/violeta/charlas/fig/smith15_imf.ps}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/lacey15_submm.ps}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{The model LF evolution depends on the SPS choice:}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/lf_sps/lfK_2zobs.eps}
+%\end{frame}
+%
+%\begin{frame}{The dust model}
+%\begin{enumerate}
+%\item Assumptions:
+%\includegraphics[height=0.45\textheight]{/home/violeta/charlas/fig/lbg/lit_ext.eps}
+%\includegraphics[height=0.45\textheight]{/home/violeta/charlas/fig/granato.eps}
+%
+%\item \includegraphics[height=0.1\textheight]{/home/violeta/charlas/fig/galform.eps} \break ${\rm mag_{intrinsic}}$, inclination,  $\tau _{V_0}$
+%
+%\item {\textcolor{purple}{\bf Ferrara's RT model:} ${\rm mag_{attenuated}}$} 
+%\end{enumerate}
+%\end{frame}
+%
+%
+%\begin{frame}{The dust model matters}
+%\begin{columns}
+%\begin{column}{5cm}
+%   \includegraphics[height=1\textheight]{/home/violeta/charlas/fig/lf_sps/v_lf_4z.eps}
+%\end{column}
+%\begin{column}{7cm}
+%\begin{itemize}
+%\item There is an increase in the dust attenuation with redshift. This is due to the attenuation being related to
+%   \begin{equation*}
+%     \tau _{V_0}=0.043\Big[\frac{M_{\rm cold}}{2\pi
+%         h_{R}^2}\frac{pc^2}{M_{\rm \odot}}\Big]\Big(\frac{Z_{\rm cold}}{0.02}\Big)
+%   \end{equation*}
+%\item An other example: \begin{center}
+%\includegraphics[height=0.45\textheight]{/home/violeta/charlas/fig/lbg/beta6_mag_bou11.eps}
+%\end{center}
+%\end{itemize}
+%\end{column}
+%\end{columns}
+%
+%\end{frame}
+%
+%
+%%______SF laws
+%\begin{frame}{Back to the physics of model galaxies}
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    \node [cloud] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%    \node [cloud, below of=cosmo, yshift=1cm] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [decision, below of=dm] (cool) {\textcolor{white}{Efficient cooling?}}; 
+%   \node [empty, below of=cool, xshift=-0.4cm, yshift=0.4cm] (yescool) {\textcolor{green!50!black!50}{Yes}};
+%   \node [empty, left of=cool, xshift=0.4cm, yshift=0.2cm] (nocool) {\textcolor{green!50!black!50}{No}};
+%    \node [thing, left of=cool, xshift=-1cm] (dh) {Dark Halo}; 
+%    \node [decision, below of=cool, yshift=-1cm] (jm) {\textcolor{white}{Large j?}}; 
+%   \node [empty, right of=jm, yshift=1cm, xshift=-1.2cm, rotate=40 ] (yesj) {\textcolor{green!50!black!50}{Yes}};
+%   \node [empty, right of=jm, yshift=-1cm, xshift=-1.2cm, rotate=-40] (noj) {\textcolor{green!50!black!50}{No}};
+%    \node [thing, right of=jm, yshift=1.5cm] (disc) {Disc}; 
+%    \node [thing, right of=jm, yshift=-1.5cm] (bulge) {Bulge}; 
+%    \node [decision, right of=jm,xshift=1.5cm] (merge) {\small \textcolor{white}{Merger? Disc instability?}}; 
+%    % Draw edges
+%    \path [line, thick] (cosmo) -> (dm); \path [line, thick] (dm) -> (cool);
+%    \path [line, thick] (cool) -> (dh); \path [line, thick] (dh) -> (dm);
+%    \path [line, thick] (cool) -> (jm); \path [line, thick] (jm) -> (disc);
+%    \path [line, thick] (disc) -> (merge); \path [line, thick] (jm) -> (bulge);
+%    \path [line, thick] (merge) -> (bulge); 
+%\end{tikzpicture}
+%\end{frame}
+%
+%\begin{frame}{The model baryonic component in a halo}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/intro/lagos_chart.ps}
+%\end{frame}
+%%
+%
+%
+%\begin{frame}{The GP14 and GP16 flavours of \gl~}
+%\tikzstyle{decision} = [diamond, draw=green!50!black!50,fill=green!50!black!50, text centered, text width=3.8em]
+%\tikzstyle{up} = [rectangle, draw, very thick,
+%draw=blue!50!black!50,level distance=4cm,
+%    text width=15em, text centered, rounded corners, minimum height=8em]
+%\tikzstyle{down} = [rectangle, draw, very thick,
+%draw=red!50!black!50,level distance=4cm,
+%    text width=5em, text centered, rounded corners, minimum height=3em]
+%\tikzstyle{up1} = [rectangle, draw, very thick,
+%draw=blue!50!black!50,level distance=4cm,
+%    text width=5em, text centered, rounded corners, minimum height=5em]
+%\tikzstyle{down1} = [rectangle, draw, very thick,
+%draw=red!50!black!50,level distance=4cm,
+%    text width=5em, text centered, rounded corners, minimum height=5em]
+%\tikzstyle{sed} = [rectangle, draw, very thick,
+%draw=green!50!black!50,level distance=4cm,
+%    text width=5em, text centered, rounded corners, minimum height=7em]
+%\tikzstyle{line} = [draw, -latex]
+%\tikzstyle{cloud} = [draw, ellipse,fill=black]   
+%\tikzstyle{newm} = [draw=green!50!black!50, ellipse,fill=green!50!black!50,text width=4em,text centered]   
+%\tikzstyle{prop} = [circle,fill=red, level distance=1cm,text width=5em,text centered]   
+%\tikzstyle{empty} = [minimum height=2em]   
+%
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    % Place nodes
+%    \node [empty,xshift=-2cm] (galform) {\includegraphics[height=0.15\textheight]{/home/violeta/charlas/fig/galform.eps}};
+%   \node [up, right of=galform,xshift=3.5cm,yshift=1cm] (disk) {\small \textcolor{durham}{ Using analytical equations, containing free parameters, {\sc galform} calculates the physical processes affecting the evolution of galaxies:
+%\hspace{-0.5cm}{\begin{itemize}
+%\item Gas cooling $\Rightarrow$ Disk formation 
+%\item Galaxy mergers $\Rightarrow$ Spheroids
+%\item SF{\color{red}$^*$} \& Feedback \\ \hspace{1cm}{\color{red} from both SNe \& AGN}
+%\item Chemical Evolution
+%\item Stellar population \& Extinction
+%\end{itemize}}
+%}};
+%    \node [cloud, above of=galform] (dm) {\textcolor{white}{DM Merger trees}}; 
+%    \node [cloud, above of=dm,yshift=-1cm] (cosmo) {\textcolor{white}{$\Lambda$CDM   Cosmology}}; 
+%%%
+%%%
+%    % Draw edges
+%    \path [line, thick] (cosmo) -> (dm);
+%    \path [line, thick] (dm) -> (galform);
+%%
+%\end{tikzpicture}
+%{\color{red}$^*$} New improved treatment of SF in disks ({\color{durham}Lagos et al. 2011}) based on the empirical law from Blitz \& Rosolowsky (2006), following explicitly the He, HI \& H$_2$:
+%\begin{equation*}
+%\Sigma _{SFR}= \frac{1}{\tau _{mol.\, gas}}\times \frac{\Sigma _{mol.\, gas}}{\Sigma _{total\, gas}}(\rm{P_{hydrostatic}\, of\, the\, disk})\times \Sigma _{cold\, gas}
+%\end{equation*} 
+%\end{frame}
+%
+%
+%
+%
+%%______Eagle (Planck)
+%\begin{frame}{The \eg~ simulation}
+%\begin{columns}
+%\vspace{-3cm}\begin{column}{8cm}
+%\movie[autostart]{\includegraphics[height=0.9\textheight]{/home/violeta/charlas/fig/eagle/eagle_movie.eps}}{movie2}
+%\end{column}
+%\begin{column}{3.5cm}
+%\begin{itemize}
+%\item Hydro simulation using {\sc gadget-3} (SPH) + {\sc anarchy} 
+%\item 100 Mpc box with a $10^6$ M$_{\odot}$ gas mass resolution 
+%\item Planck cosmology
+%%% Anarchy solves some of the known problems of SPH sim. although ``we find that our results are generally substantially less sensitive to changes in the hydrodynamical techniques than to reasonable variations in the subgrid physics'' (Schaye'14)
+%\end{itemize}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%%_________________Comparison
+%\begin{frame}{The galaxy stellar mass function}
+%\begin{center}
+%\includegraphics<1>[width=1\textwidth]{/home/violeta/charlas/fig/eagle/joop_smf.eps}
+%\end{center}
+%{\color{orange}
+%\begin{flushright}
+%      Schaye+15
+% 
+%      See also Somerville and Dave 2015
+%\end{flushright}}
+%\end{frame}
+%
+%
+%\begin{frame}{Compared mass functions: \eg~ and \gl}
+%\begin{columns}
+%\begin{column}{5cm}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig1_halomf_new.ps}
+%\end{column}
+%\begin{column}{5cm}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig3_smf.ps}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%\begin{frame}{The $M_*-M_{\rm halo}$ relation}
+%\begin{columns}
+%\begin{column}{5cm}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig6_halom_vs_sm.ps}
+%\end{column}
+%\begin{column}{5cm}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/msmh_noagn.ps}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%\begin{frame}{The SF sequence from different models}
+%\includegraphics[height=0.7\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig11_sm_vs_ssfr_gal_0_1_dexbin_10_eagle.ps}
+%\includegraphics[height=0.7\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig11_sm_vs_ssfr_gal_0_1_dexbin_10_galform.ps}
+%\includegraphics[height=0.7\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig11_sm_vs_ssfr_lgal_0_1_dexbin_10_lgal.ps}
+%\end{frame}
+%
+%
+%\begin{frame}{Environmental effects (Fumagalli+14)}
+%\includegraphics[width=1\textwidth]{/home/violeta/papers/fumagalli14/nicefov.eps}
+%
+%
+%But this shows stripping of warm gas within the Norma cluster ($M_{\rm halo}\sim10^{15}\msun$).
+%\end{frame}
+%
+%
+%\begin{frame}{The passive fractions}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/plots_with_obs/p_fig8_fraction_vs_sm_with_obs.ps}
+%\hspace{0.5cm}
+%%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig8_fraction_vs_sm.ps}
+%\includegraphics[height=0.9\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig10_fraction_vs_sm_z1.ps}
+%%\includegraphics[height=0.8\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig10_fraction_vs_sm_z2.ps}
+%\end{frame}
+%
+%
+%
+%\begin{frame}{The SFRD and sSFR evolution}
+%\begin{columns}
+%\begin{column}{5cm}
+%\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/eagle_sams/p_fig1_ssfr_vs_time_ssfr_1pz_3.ps}
+%\end{column}
+%\begin{column}{5cm}
+%\vspace{-3cm}\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/eagle_sams/p_fig1_sfr_vs_z_maudu_new_log1z.ps}
+%
+%\vspace{-3cm}\begin{center}
+%$t_{\rm growth}^{-1} ({\rm Gyr}^{-1})  = \frac{{\rm d}M/{\rm d}t}{M(z)}$
+%$M(z) = M_0(1+z)^{\alpha}e^{\beta z}$
+%\end{center}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}{The evolution of the sSFR compared with observations}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/sfh/sfh_mit14.ps}
+%\end{frame}
+%
+%\begin{frame}{A model with a variable reincorporation timescale}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/sfh/smf_h15.ps}
+%\end{frame}
+%
+%\begin{frame}{The average stellar mass assembly histories}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/sfh/mdot_mit14.ps}
+%\end{frame}
+%
+%
+%%\begin{frame}{The GSMF split in to passive and star-forming galaxies}
+%%\includegraphics[height=0.55\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig4_smf_split_cen_active.ps}
+%%\includegraphics[height=0.55\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig4_smf_split_cen_passive.ps}
+%%\includegraphics[height=0.55\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig4_smf_split_sat_active.ps}
+%%\includegraphics[height=0.55\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig4_smf_split_sat_passive.ps}
+%%\end{frame}
+%
+%
+%\begin{frame}{Metallicity}
+%\begin{columns}
+%\begin{column}{5cm}
+%\begin{overprint}
+%\includegraphics<1>[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig_metal_stellar_vs_sm_ref.ps}
+%\includegraphics<2>[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/hirschmann16.ps}
+%\end{overprint}
+%\end{column}
+%\begin{column}{5cm}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/eagle_sams/p_fig_metal_vs_sm.ps}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%
+%\begin{frame}{Sizes}
+%\begin{columns}
+%\begin{column}{5cm}
+%\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/r50_discs.ps}
+%
+%
+%\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/lagosWMAP7/r50_bulges.ps}
+%\end{column}
+%\begin{column}{5cm}
+%\begin{center}
+%\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/eagle_sams/p_fig_r50_vs_sm.ps}
+%\end{center}
+%\end{column}
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}{The effect of having the wrong sizes at $z=1$ {\small (Merson+2016)}}
+%\includegraphics[width=1\textwidth]{/home/violeta/charlas/fig/merson_clusters/CGLF_Hband.ps}
+%\end{frame}
+%
+%
+%\begin{frame}{Some cluster memebers at $z=1$ are very dusty {\small (Merson+2016)}}
+%\begin{center}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/merson_clusters/H_attenuation_property_medians.ps}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/merson_clusters/size_mass_relation_properties.ps}
+%\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}{The modelled RS {\small (Merson+2016)}}
+%\includegraphics[height=1\textheight]{/home/violeta/charlas/fig/merson_clusters/galform_clusters_CMR.ps}
+%\end{frame}
+%
+%      
+%
+%%%__Conclusions__________________
+%\begin{frame}{Conclusions}
+%\begin{block}{}
+%\begin{itemize}
+%\item The stellar mass assembly history closely follows that of the dark matter, which is not the case for observations.
+%\item The GSMF and SF sequence in SAMs have very similar evolution to hydrodynamical simulations.  
+%\item The observed mass-metallicity relation is not reproduced by models which points to a excesively crude {\color{durham} modelling of flows}.
+%\item The {\color{durham} modelling of sizes} needs a major improvement. The problem is sizes affect other aspects such as the star formation!
+%\end{itemize}
+%\end{block}
+%  \begin{flushright}
+%      {\color{orange} Gonzalez-Perez et al. 2014}
+%
+%      {\color{orange} Guo, Gonzalez-Perez et al. 2016}
+%  \end{flushright}
+%\end{frame}
+%
+%\begin{frame}{Use the Virgo-Millennium and \eg~ Data Bases: }
+%\begin{columns}
+%\begin{column}{5cm}
+%  \includegraphics[height=.8\textheight]{/home/violeta/charlas/fig/DB15.ps}
+%\begin{flushleft}
+%      %{\color{red} http://galaxy-catalogue.dur.ac.uk:8080/MyMillennium/}
+%      \vspace{-0.5cm}{\color{red} http://virgo.dur.ac.uk}
+%\end{flushleft}
+%\end{column}
+%\begin{column}{6cm}
+%  \includegraphics[height=0.6\textheight]{/home/violeta/charlas/fig/eagle/db.ps}
+%\end{column}
+%\end{columns}
+%\begin{flushright}
+%      {\color{red} http://www.eaglesim.org/database.html}
+%\end{flushright}
+%\end{frame}
+
+
+%-----------------------------------------------
+\end{document}
