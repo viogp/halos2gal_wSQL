@@ -1,6 +1,10 @@
 
 http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_intro.pdf
+
 http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_mf_ex1.pdf
+
+
+https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook#gs.898txds
 
 --------------------------------------------
 Special Course: Galaxy Formation and Evolution
