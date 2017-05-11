@@ -11,3 +11,8 @@ H: Introduction to Python and SQL (Structured Query Language): obtaining the mas
 2nd class (30/09):
 T: Introduction to different techniques for modelling galaxies: Halo Occupation Distribution (HOD), Subhalo Matching (SHAM), Semi-Analytic Models (SAM), hydrodynamical simulations. Advantages of different techniques depending on the application.
 H: Use of SQL to get luminosity functions (LF) and galaxy stellar mass function (GSMF) of galaxies. Discussion of results. 
+
+
+----
+Github classroom:
+https://classroom.github.com/classrooms/28626979-halos2galexercices
