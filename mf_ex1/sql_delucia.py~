@@ -1,3 +1,0 @@
-import eagleSqlTools as sql
-con = sql.connect("xyz", "abc", url="http://virgodb.dur.ac.uk:8080/Millennium")
-data = con.execute_query("select top 10 * from snapshots")

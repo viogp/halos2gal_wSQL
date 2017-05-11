@@ -1,2 +1,0 @@
-#LWP-Cookies-2.0
-Set-Cookie3: JSESSIONID=AF72FA01A2C6492FD801F19DDC644957; path="/Millennium"; domain="virgodb.dur.ac.uk"; path_spec; discard; version=0

@@ -1,5 +1,6 @@
 
-http://multidarkgalaxies.fcaglp.unlp.edu.ar/final_programme.html
+http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_intro.pdf
+http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_mf_ex1.pdf
 
 --------------------------------------------
 Special Course: Galaxy Formation and Evolution
