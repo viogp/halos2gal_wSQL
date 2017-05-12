@@ -13,10 +13,10 @@ the_query = """select .1*(.5+floor((log10(stellarMass)+10.)/.1)) as mass,
                order by mass"""
 
 data = con.execute_query(the_query)
-
+print type(data)
 mass = data["mass"] 
 phi = data["phi"]
 
-outf = 'delucia_gsmf.txt'
-np.savetxt(outf,data)
-print 'Output file:',outf
+#outf = 'delucia_gsmf.txt'
+#np.savetxt(outf,data)
+#print 'Output file:',outf

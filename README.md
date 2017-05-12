@@ -1,11 +1,15 @@
 
+https://github.com/CKrawczyk/jupyter_data_languages
+
+----------------------------
+
 http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_intro.pdf
 
 http://multidarkgalaxies.fcaglp.unlp.edu.ar/PDF/vgp_mf_ex1.pdf
 
 
 https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook#gs.898txds
-
+https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
 --------------------------------------------
 Special Course: Galaxy Formation and Evolution
 
