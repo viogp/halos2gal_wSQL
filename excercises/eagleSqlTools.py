@@ -17,8 +17,11 @@ numpy_dtype = {
     "int"      : np.int32,
     "bigint"   : np.int64,
     "char"     : np.dtype("|S256"),
-    "nvarchar" : np.dtype("|S256")
+    "nvarchar" : np.dtype("|S256"),
+    "decimal"  : np.float64
     }
+
+default_url = "http://virgodb.dur.ac.uk:8080/Eagle"
 
 # Cookie storage - want to avoid creating a new session for every query
 cookie_file = "sql_cookies.txt"
@@ -30,13 +33,13 @@ except IOError:
 
 
 class WebDBConnection:
-    def __init__(self, username, password=None):
+    def __init__(self, username, password=None, url=default_url):
         """Class to store info required to connect to the web server"""
         # Get password if necessary
         if password is None:
             password = getpass()
         # Get URL for the database
-        self.db_url = "http://galaxy-catalogue.dur.ac.uk:8080/Eagle"
+        self.db_url = url
         # Set up authentication and cookies
         self.password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
         self.password_mgr.add_password(None, self.db_url, username, password)
@@ -99,10 +102,11 @@ class WebDBConnection:
 
 
 
-def connect(user, password=None):
+def connect(user, password=None, url=default_url):
     """Connect to EAGLE database and return a connection object"""
-    return WebDBConnection(user, password)
+    return WebDBConnection(user, password, url=url)
 
 
 def execute_query(con, sql):
     return con.execute_query(sql)
+
